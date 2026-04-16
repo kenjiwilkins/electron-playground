@@ -5,6 +5,11 @@ function createWindow(): void {
   const win = new BrowserWindow({
     width: 800,
     height: 600,
+    transparent: true,
+    backgroundColor: '#00000000',
+    titleBarStyle: 'hiddenInset',      // macOS: keeps traffic lights, hides title text
+    vibrancy: 'fullscreen-ui',         // macOS
+    visualEffectState: 'active',       // macOS: keep effect active even when unfocused
     webPreferences: {
       preload: join(__dirname, '../preload/index.js')
     }
