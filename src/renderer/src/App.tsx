@@ -2,7 +2,7 @@ function App(): JSX.Element {
   const versions = (window as Window & { versions?: { node: () => string; chrome: () => string; electron: () => string } }).versions
 
   return (
-    <div style={{ fontFamily: 'sans-serif', padding: '2rem' }}>
+    <div style={{ fontFamily: 'sans-serif', padding: '2rem', background: 'transparent' }}>
       <h1>Hello from Electron + React!</h1>
       <p>👋</p>
       {versions && (
