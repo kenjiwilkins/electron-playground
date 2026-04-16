@@ -1,9 +1,11 @@
 {
   "name": "electron-playground",
   "version": "1.0.0",
-  "main": "main.js",
+  "main": "out/main/index.js",
   "scripts": {
-    "start": "electron .",
+    "start": "electron-vite preview",
+    "dev": "electron-vite dev",
+    "build": "electron-vite build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -11,6 +13,17 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "electron": "^41.2.1"
+    "@types/node": "^25.6.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "electron": "^41.2.1",
+    "electron-vite": "^5.0.0",
+    "typescript": "^6.0.2",
+    "vite": "^8.0.8"
+  },
+  "dependencies": {
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5"
   }
 }
