@@ -1,21 +1,35 @@
-function App(): JSX.Element {
-  const versions = (window as Window & { versions?: { node: () => string; chrome: () => string; electron: () => string } }).versions
+import { useState } from 'react'
+import Sidebar from './components/Sidebar'
+import WidgetGrid from './components/WidgetGrid'
+import WidgetView from './components/WidgetView'
+import { WIDGETS } from './data/widgets'
+
+export default function App(): JSX.Element {
+  const [activeWidgetId, setActiveWidgetId] = useState<string | null>(null)
+  const [sidebarOrder, setSidebarOrder] = useState<string[]>(WIDGETS.map(w => w.id))
 
   return (
-    <div style={{ fontFamily: 'sans-serif', background: 'transparent' }}>
-      <div style={{ height: 52, WebkitAppRegion: 'drag' } as React.CSSProperties} />
-      <div style={{ padding: '0 2rem 2rem' }}>
-      <h1>Hello from Electron + React!</h1>
-      <p>👋</p>
-      {versions && (
-        <p>
-          This app is using Chrome (v{versions.chrome()}), Node.js (v{versions.node()}), and
-          Electron (v{versions.electron()})
-        </p>
-      )}
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', background: 'transparent' }}>
+      {/* macOS drag region */}
+      <div style={{ height: 52, flexShrink: 0, WebkitAppRegion: 'drag' } as React.CSSProperties} />
+
+      {/* Layout */}
+      <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
+        <Sidebar
+          order={sidebarOrder}
+          onOrderChange={setSidebarOrder}
+          activeWidgetId={activeWidgetId}
+          onWidgetSelect={setActiveWidgetId}
+        />
+
+        <main style={{ flex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+          {activeWidgetId ? (
+            <WidgetView widgetId={activeWidgetId} onBack={() => setActiveWidgetId(null)} />
+          ) : (
+            <WidgetGrid onWidgetClick={setActiveWidgetId} />
+          )}
+        </main>
       </div>
     </div>
   )
 }
-
-export default App
